@@ -238,3 +238,229 @@ local args = {
 workspace:WaitForChild("GainMaterial"):InvokeServer(unpack(args))
    end    
 })
+
+local api = loadstring(game:HttpGet("https://raw.githubusercontent.com/ADSKerOffical/API/refs/heads/main/Api.lua"))()
+local Tab = Window:MakeTab({
+	Name = "Total destruction",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local player = game.Players.LocalPlayer
+
+Tab:AddButton({
+ Name = "Shoot all slimes",
+ Callback = function()
+for _, part in ipairs(workspace:GetDescendants()) do
+  if part:IsA("BasePart") and part.Name == "Slime" then
+local args = {
+    [1] = part.Position,
+    [2] = "skill8"
+}
+
+game:GetService("Players").LocalPlayer.Character.Bow.Shoot.RemoteEvent:FireServer(unpack(args))
+   end
+end
+   end    
+})
+
+Tab:AddButton({
+ Name = "Shoot all slimes 2",
+ Callback = function()
+for i = 0, 8 do
+for _, part in ipairs(workspace:GetDescendants()) do
+  if part:IsA("BasePart") and part.Name == "Slime" then
+local args = {
+    [1] = part.Position,
+    [2] = "skill" .. tostring(i)
+}
+
+game:GetService("Players").LocalPlayer.Character.Bow.Shoot.RemoteEvent:FireServer(unpack(args))
+   end
+end
+  end
+   end    
+})
+
+Tab:AddLabel("Equip a hammer to make these functions work↓↓↓")
+
+Tab:AddButton({
+ Name = "Destroy place",
+ Callback = function()
+for _, part in ipairs(workspace:GetDescendants()) do
+  if part:IsA("BasePart") then
+coroutine.wrap(function()
+local args = {
+    [1] = part
+}
+
+game:GetService("Players").LocalPlayer.Character.DeleteTool.LocalScript.RF:InvokeServer(unpack(args))
+end)()
+  end
+end
+   end    
+})
+
+Tab:AddTextbox({
+ Name = "Punish player",
+ Default = "",
+ TextDisappear = false,
+ Callback = function(Value)
+   local playerr = api:GetPlayerByLowerName(Value)
+    if playerr then
+      if playerr ~= player then
+coroutine.wrap(function()
+local args = {
+    [1] = playerr.Character.Humanoid
+}
+
+player.Character.DeleteTool.LocalScript.RF:InvokeServer(unpack(args))
+end)()
+      end
+    end
+ end   
+})
+
+Tab:AddTextbox({
+ Name = "Kick player",
+ Default = "",
+ TextDisappear = false,
+ Callback = function(Value)
+local playerr = api:GetPlayerByLowerName(Value)
+    if playerr then
+      if playerr ~= player then
+coroutine.wrap(function()
+local args = {
+    [1] = playerr.Backpack
+}
+
+player.Character.DeleteTool.LocalScript.RF:InvokeServer(unpack(args))
+end)()
+      end
+    end
+ end   
+})
+
+Tab:AddTextbox({
+ Name = "Punish player 2",
+ Default = "",
+ TextDisappear = false,
+ Callback = function(Value)
+local playerr = api:GetPlayerByLowerName(Value)
+    if playerr then
+      if playerr ~= player then
+coroutine.wrap(function()
+local args = {
+    [1] = playerr.Character.Humanoid.Animator
+}
+
+game:GetService("Players").LocalPlayer.Character.DeleteTool.LocalScript.RF:InvokeServer(unpack(args))
+end)()
+      end
+    end
+ end   
+})
+
+Tab:AddTextbox({
+ Name = "Kill player",
+ Default = "",
+ TextDisappear = false,
+ Callback = function(Value)
+   local playerr = api:GetPlayerByLowerName(Value)
+    if playerr then
+      if playerr ~= player then
+coroutine.wrap(function()
+local args = {
+    [1] = playerr.Character.Head.Mesh
+}
+
+game:GetService("Players").LocalPlayer.Character.DeleteTool.LocalScript.RF:InvokeServer(unpack(args))
+end)()
+      end
+    end
+ end   
+})
+
+Tab:AddTextbox({
+ Name = "Server ban player",
+ Default = "",
+ TextDisappear = true,
+ Callback = function(Value)
+local playerr = api:GetPlayerByLowerName(Value)
+    if playerr then
+      if playerr ~= player then
+spawn(function()
+ repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("DeleteTool")
+local args = {
+    [1] = playerr.Backpack
+}
+
+game:GetService("Players").LocalPlayer.Character.DeleteTool.LocalScript.RF:InvokeServer(unpack(args))
+end)
+game.Players.PlayerAdded:Connect(function(plae)
+ if plae.UserId == playerr.UserId then
+spawn(function()
+ repeat wait() until game.Players.LocalPlayer.Character:FindFirstChild("DeleteTool")
+local args = {
+    [1] = plae.Backpack
+}
+
+game:GetService("Players").LocalPlayer.Character.DeleteTool.LocalScript.RF:InvokeServer(unpack(args))
+end)
+ end
+end)
+      end
+    end
+ end   
+})
+
+Tab:AddButton({
+ Name = "Kill all",
+ Callback = function()
+for _, plr in ipairs(game.Players:GetPlayers()) do
+  if plr ~= player then
+coroutine.wrap(function()
+local args = {
+    [1] = plr.Character.Head.Mesh
+}
+
+game:GetService("Players").LocalPlayer.Character.DeleteTool.LocalScript.RF:InvokeServer(unpack(args))
+end)()
+  end
+end
+   end    
+})
+
+Tab:AddButton({
+ Name = "Punish all",
+ Callback = function()
+for _, plr in ipairs(game.Players:GetPlayers()) do
+ if plr ~= player then
+coroutine.wrap(function()
+local args = {
+    [1] = plr.Character.Humanoid
+}
+
+game:GetService("Players").LocalPlayer.Character.DeleteTool.LocalScript.RF:InvokeServer(unpack(args))
+end)()
+  end
+end
+   end    
+})
+
+Tab:AddButton({
+ Name = "Kick all",
+ Callback = function()
+for _, plr in ipairs(game.Players:GetPlayers()) do
+ if plr ~= player then
+coroutine.wrap(function()
+local args = {
+    [1] = plr.Backpack
+}
+
+game:GetService("Players").LocalPlayer.Character.DeleteTool.LocalScript.RF:InvokeServer(unpack(args))
+end)()
+  end
+end
+   end    
+})
